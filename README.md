@@ -6,7 +6,7 @@ It is written in CoffeeScript (which compiles to JavaScript), so that it can be 
 This includes iOS and Android, as well as compliant desktop browsers such as Chrome, Firefox and Safari.
 Some of the build tools are written in Java, so this is required to build the game from source.
 
-Included is a playable and fun demo game. Go here to play it: http://fillin.info
+Included is a playable and fun demo game. Go here to play it: http://pents90.github.io/eburp
 
 This engine was written to make Gurk III, an RPG for [Android](http://play.google.com/store/apps/details?id=com.larvalabs.gurk3) and [iOS](http://itunes.apple.com/us/app/gurk-iii-the-8-bit-rpg/id685128493?mt=8).
 
