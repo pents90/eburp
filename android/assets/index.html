@@ -1,0 +1,142 @@
+<!-- GURK -->
+<html>
+<head>
+    <title>Gurk</title>
+    <meta name="viewport" content="target-densitydpi=device-dpi" />
+    <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        console.log("Start JS");
+
+        function getScreenWidth() {
+            return Android.getScreenWidth();
+        }
+        function getScreenHeight() {
+            return Android.getScreenHeight();
+        }
+        var BUTTON_WIDTH = 45;
+        var BUTTON_HEIGHT = 23;
+        var GAP_Y;
+        var GAP_X;
+        var GRID_WIDTH;
+        var GRID_HEIGHT;
+        var pixelWidth = Math.floor(getScreenWidth() / 128);
+        if (pixelWidth * (4*2 + 3 * BUTTON_WIDTH) > getScreenWidth() && pixelWidth > 1) {
+            pixelWidth--;
+        }
+        var testMargin = (getScreenHeight() / pixelWidth - (132 + 6 + 85))/(16 + 10);
+        //console.log("Test Margin: " + testMargin);
+        if (testMargin < 0 && pixelWidth > 1) {
+            pixelWidth--;
+        }
+        if (pixelWidth > 8) {
+            pixelWidth = 8;
+        }
+        console.log("Pixel width: " + pixelWidth);
+    </script>
+    <!-- Icon Map -->
+    <script type="text/javascript" src="icons.js"></script>
+    <!-- Game Data -->
+    <script type="text/javascript" src="game.js"></script>
+    <!-- Game Code -->
+    <script type="text/javascript" src="gurk.js"></script>
+    <script type="text/javascript">
+
+        // Double-draws, combating an Android bug
+        var drawHack = false;
+
+        function phoneClick(event){
+          App.gurk.phoneClick(event.touches[0]);
+          return false;
+        }
+        function playAudio(sound) {
+            // todo - implement by overriding in Android
+            Android.playSound(sound);
+            return false;
+        }
+        function playTrack(track) {
+            Android.playMusic(track);
+        }
+        function stopTrack() {
+            Android.stopMusic();
+        }
+        function putData(key, value) {
+            Android.putData(key, value);
+            return false;
+        }
+        function getData(key) {
+            return Android.getData(key);
+        }
+        function doRotates(key) {
+            return Android.getData(key);
+        }
+        function doCustomDraws() {
+            return Android.doCustomDraws();
+        }
+    </script>
+    <!--
+    <style type="text/css">
+        #fixed_div { position: fixed; width: 10px; height: 10px; left: 0px; top: 0px; }
+        canvas {
+            image-rendering: -webkit-optimize-contrast; // Webkit
+            image-rendering: optimize-contrast;
+        }
+    </style>
+    -->
+</head>
+<body style="background: #83747a; margin: 0; -webkit-user-select: none;">
+<div id="mainDiv" style="overflow-x: visible; z-index:1; -webkit-transform: translate3d(0,0,0);">
+<canvas id="screenID" width="384px" height="384px" style="border: 6px solid #000; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; position: absolute;"></canvas>
+<canvas id="controlID" width="470px" height="255px" style="position: absolute;" ontouchstart="phoneClick(event)"></canvas>
+</div>
+<div style="display: none;">
+    <canvas id="workID" width="60px" height="60px"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("Doing ready()");
+        var w = getScreenWidth();
+        var h = getScreenHeight();
+        var margin = (h / pixelWidth - (132 + 6 + 85))/(16 + 10);
+        var topMargin = Math.floor(16 * margin * pixelWidth);
+        var controlHeight = h - (topMargin + pixelWidth * 132);
+        var gapX = Math.floor((w/pixelWidth - 3 * BUTTON_WIDTH) / 4);
+        var gapY = Math.floor((controlHeight/pixelWidth - 3 * BUTTON_HEIGHT) / 4);
+        var gridWidth = 4 * gapX + 3 * BUTTON_WIDTH;
+        var gridHeight = 4 * gapY + 3 * BUTTON_HEIGHT;
+        var screenLeft = Math.floor((w - pixelWidth * 132) / 2);
+        var controlTop = topMargin + 132 * pixelWidth;
+        var controlLeft = Math.floor((w - gridWidth * pixelWidth) / 2);
+        // var bottom = h - pixelWidth * (24 + 134 + 10);
+        $('#mainDiv').width(w);
+        $('#mainDiv').height(h);
+        $('#mainDiv').css('background-image', "url('device" + pixelWidth + ".png')");
+        /*
+         $('#screenDiv').width(pixelWidth * 134);
+        $('#screenDiv').height(pixelWidth * 134);
+        $('#screenDiv').css('padding-top', '' + topMargin + 'px');
+        */
+        screen = document.getElementById('screenID');
+        screen.width = pixelWidth * 128;
+        screen.height = pixelWidth * 128;
+        $('#screenID').css("left", "" + screenLeft + "px");
+        $('#screenID').css("top", "" + topMargin + "px");
+        console.log("After width: " + $('#screenID').width());
+//        $('#controlDiv').width(w);
+        // $('#controlDiv').css('padding-top', '' + (6 * pixelWidth) + 'px');
+        control = document.getElementById('controlID');
+        control.width = gridWidth * pixelWidth;
+        control.height =gridHeight * pixelWidth;
+        $('#controlID').css("top", "" + controlTop + "px");
+        $('#controlID').css("left", "" + controlLeft + "px");
+        work = document.getElementById('workID');
+        work.width = pixelWidth * 20;
+        work.height = pixelWidth * 20;
+        GAP_X = gapX;
+        GAP_Y = gapY;
+        GRID_WIDTH = gridWidth;
+        GRID_HEIGHT = gridHeight;
+        App.init();
+    });
+</script>
+</html>

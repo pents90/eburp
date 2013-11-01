@@ -1,0 +1,102 @@
+<!-- GURK -->
+<html>
+<head>
+    <title>Gurk</title>
+    <script type="text/javascript">
+//        var pixelWidth = Math.floor(window.outerWidth / 128)
+        var pixelWidth = 4
+    </script>
+    <!-- Icon Map -->
+    <script type="text/javascript" src="icons.js"></script>
+    <!-- Game Data -->
+    <script type="text/javascript" src="game.js"></script>
+    <!-- Game Code -->
+    <script type="text/javascript" src="gurk.js"></script>
+    <script type="text/javascript">
+        var drawHack = false;
+        var SCREEN_HEIGHT = window.innerHeight;
+        var BIG = SCREEN_HEIGHT >= 568;
+        var pixelWidth = 4;
+        var GAP_X = 6;
+        var GAP_Y = BIG ? 11 : 4;
+        var GRID_WIDTH = 159;
+        var GRID_HEIGHT = BIG ? 113 : 85;
+        function phoneClick(event){
+          console.log("Touch");
+          App.gurk.phoneClick(event.touches[0]);
+          return false;
+        }
+
+        // Debug
+        console = new Object();
+        console.log = function(log) {
+            var iframe = document.createElement("IFRAME");
+            iframe.setAttribute("src", "ios-log:#iOS#" + log);
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+        console.debug = console.log;
+        console.info = console.log;
+        console.warn = console.log;
+        console.error = console.log;
+
+        console.log("Yes guy!");
+        console.log("Window height: " + SCREEN_HEIGHT);
+
+        // Audio
+        function playAudio(sound) {
+            var iframe = document.createElement("IFRAME");
+            iframe.setAttribute("src", "sound:" + sound);
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+        function playTrack(song) {
+            var iframe = document.createElement("IFRAME");
+            iframe.setAttribute("src", "song:" + song);
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+        function stopTrack() {
+            var iframe = document.createElement("IFRAME");
+            iframe.setAttribute("src", "stopmusic:yes");
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+        function putData(key, value) {
+            localStorage[key] = value;
+        }
+        function getData(key) {
+            return localStorage[key]
+        }
+        function doRotates(key) {
+            return false;
+        }
+        function doCustomDraws() {
+            return true;
+        }
+        // todo - add two local storage methods and the context scale stuff, just clone from android
+    </script>
+</head>
+<body onLoad="document.body.style.zoom=0.5; console.log('onload'); App.init('ios');" style="background: #83747a; margin: 0; -webkit-user-select: none;">
+<div style="width: 640px; min-height: 1140px; margin-left: auto; margin-right: auto; background-image: url('device4.png')">
+    <div style="width: 536px; margin-left: auto; margin-right: auto; padding-top: 64px;">
+        <canvas id="screenID" width="512px" height="512px" style="border: 12px solid #000; -webkit-border-radius: 9px; -moz-border-radius: 9px; border-radius: 9px;"></canvas>
+    </div>
+    <div id="controlDiv" style="width: 640px; margin-left: auto; margin-right: auto; padding-top: 8px;">
+        <canvas id="controlID" width="640px" height="640px" ontouchstart="javascript:phoneClick(event)"></canvas>
+    </div>
+</div>
+<div style="background: #fff; display: none;">
+    <canvas id="workID" width="80px" height="80px"></canvas>
+</div>
+<script type="text/javascript">
+    if (BIG) {
+        document.getElementById("controlDiv").style.paddingTop = '40px';
+    }
+</script>
+</body>
+</html>

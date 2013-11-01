@@ -1,0 +1,194 @@
+<!-- EBURP-->
+<html>
+<head>
+    <title>E.B.U.R.P.</title>
+    <script type="text/javascript">
+        var pixelWidth = 2;
+    </script>
+    <!-- Icon Map -->
+    <script type="text/javascript" src="icons.js"></script>
+    <!-- Game Data -->
+    <script type="text/javascript" src="game.js"></script>
+    <!-- Game Code -->
+    <script type="text/javascript" src="gurk.js"></script>
+    <script type="text/javascript">
+        var drawHack = false;
+        var GAP_X = 6;
+        var GAP_Y = 11;
+        var GRID_WIDTH = 159;
+        var GRID_HEIGHT = 113;
+        var soundOn = false;
+        var currentTrack;
+
+        function toggleSound() {
+            soundOn = !soundOn;
+            if (soundOn) {
+                document.getElementById("soundToggle").innerHTML = "off";
+                if (currentTrack) {
+                    playTrack(currentTrack);
+                }
+            } else {
+                document.getElementById("soundToggle").innerHTML = "on";
+                stopTrack();
+            }
+        }
+
+        function phoneClick(event, x, y) {
+            App.gurk.phoneClick(event, x, y);
+            return false;
+        }
+
+        function playAudio(sound) {
+            if (soundOn) {
+                var element = document.getElementById(sound);
+                element.volume = 0.25;
+                element.play();
+            }
+            return false;
+        }
+        function playTrack(track) {
+            if (currentTrack == track) {
+                if (soundOn) {
+                    document.getElementById(currentTrack).play();
+                }
+                return false;
+            }
+            if (currentTrack) {
+                document.getElementById(currentTrack).pause();
+            }
+            currentTrack = track;
+            if (soundOn) {
+                document.getElementById(currentTrack).currentTime = 0;
+                document.getElementById(currentTrack).play();
+            }
+            return false;
+        }
+        function stopTrack() {
+            if (currentTrack) {
+                document.getElementById(currentTrack).pause();
+            }
+            return false;
+        }
+
+        function putData(key, value) {
+            localStorage[key] = value;
+        }
+        function getData(key) {
+            return localStorage[key]
+        }
+        function doCustomDraws() {
+            return true;
+        }
+
+    </script>
+    <style type="text/css">
+        body, p, h2 {
+            font-family: 'Helvetica Neue', 'helvetica neue', helvetica, arial, sans-serif;
+            line-height: 150%;
+            color: #ccc;
+        }
+
+        blockquote {
+            font-family: monospace;
+            font-size: 150%;
+        }
+
+        a {
+            color: #ffffff;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body onLoad="App.init();" style="background-image: url('background.jpg')">
+<div style="width: 320px; min-height: 568px; background-image: url('deviceWeb.png'); position: absolute; left: 162px; top: 164px;">
+    <div style="width: 268px; margin-left: auto; margin-right: auto; padding-top: 64px;">
+        <canvas id="screenID" width="256px" height="256px"
+                style="border: 6px solid #000; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;"></canvas>
+    </div>
+    <div style="width: 320px; margin-left: auto; margin-right: auto; padding-top: 2px;">
+        <canvas id="controlID" width="320px" height="200px" onclick="phoneClick(event, 162, 164)"></canvas>
+    </div>
+</div>
+<div style="background-color: rgba(0, 0, 0, 0.5); position: absolute; left: 600px; top: 80px; width: 400px; padding: 20px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;">
+    <!--<h2 style="text-align: center">E.B.U.R.P.</h3>-->
+    <p>The <em>Eight-Bit Univeral Role Playing</em> (EBURP) engine is cross-platform, open-source, and written in
+        CoffeeScript.</p>
+
+    <p>&#9664; To the left is a live demo game. Click the yellow the buttons with a mouse or use the keyboard:
+    <blockquote>
+        Q W E<br>
+        A S D<br>
+        Z X C
+    </blockquote>
+    </p>
+    <p>&#9835; Turn music and sound <a id="soundToggle" href="#" onclick="toggleSound()">on</a>.</p>
+    <p>The source for the engine and demo game are available on <a href="http://github.com">Github</a>.</p>
+
+    <p>EBURP was used to create <em>Gurk III, the 8-bit RPG</em> for mobile devices. Click to view in iTunes or Play.
+    </p>
+    <table border="0" width="100%">
+        <tr>
+            <td align="center"><a href="http://itunes.apple.com/us/app/gurk-iii-the-8-bit-rpg/id685128493?mt=8"><img
+                    src="ios.png"/><br/>iOS</a></td>
+            <td align="center"><a href="http://play.google.com/store/apps/details?id=com.larvalabs.gurk3"><img
+                    src="android.png"/><br/>Android</a></td>
+        </tr>
+    </table>
+</div>
+<!--
+<div>
+    <audio autoplay="autoplay" loop="loop">
+        <source src="gurkTest.mp3"/>
+        <source src="gurkTest.ogg"/>
+    </audio>
+</div>
+-->
+<div style="background: #fff; display: none;">
+    <canvas id="workID" width="60px" height="60px"></canvas>
+</div>
+<!-- Yes indeed, some hard-coding is underway... -->
+<!-- TUNES -->
+<audio id="gurkdemo4" preload="auto" loop="true">
+    <source src="gurkdemo4.mp3" type="audio/mpeg">
+    <source src="gurkdemo4.ogg" type="audio/ogg">
+</audio>
+<audio id="gurkdemo7" preload="auto" loop="true">
+    <source src="gurkdemo7.mp3" type="audio/mpeg">
+    <source src="gurkdemo7.ogg" type="audio/ogg">
+</audio>
+<audio id="gurkdemo8" preload="auto" loop="true">
+    <source src="gurkdemo8.mp3" type="audio/mpeg">
+    <source src="gurkdemo8.ogg" type="audio/ogg">
+</audio>
+<audio id="gurkdemo9" preload="auto" loop="true">
+    <source src="gurkdemo9.mp3" type="audio/mpeg">
+    <source src="gurkdemo9.ogg" type="audio/ogg">
+</audio>
+<!--<audio id="gurkdemo7" src="gurkdemo7.ogg" preload="auto" loop="true"></audio>-->
+<!--<audio id="gurkdemo8" src="gurkdemo8.ogg" preload="auto" loop="true"></audio>-->
+<!--<audio id="gurkdemo9" src="gurkdemo9.ogg" preload="auto" loop="true"></audio>-->
+<!-- SOUNDS -->
+<audio id="resist" src="resist.wav" preload="auto"></audio>
+<audio id="port" src="port.wav" preload="auto"></audio>
+<audio id="tele" src="tele.wav" preload="auto"></audio>
+<audio id="enhanced" src="enhanced.wav" preload="auto"></audio>
+<audio id="afflicted" src="afflicted.wav" preload="auto"></audio>
+<audio id="died" src="died.wav" preload="auto"></audio>
+<audio id="fire" src="fire.wav" preload="auto"></audio>
+<audio id="heal" src="heal.wav" preload="auto"></audio>
+<audio id="hit" src="hit.wav" preload="auto"></audio>
+<audio id="killed" src="killed.wav" preload="auto"></audio>
+<audio id="miss" src="miss.wav" preload="auto"></audio>
+<audio id="move" src="move.wav" preload="auto"></audio>
+<audio id="spell" src="spell.wav" preload="auto"></audio>
+<audio id="summon" src="summon.wav" preload="auto"></audio>
+
+</body>
+</html>
