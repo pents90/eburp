@@ -4035,9 +4035,9 @@ var Data = {
         "Roogard Keep" :
             {
                 started : "keepStart",
-                done : "keepStart",
+                done : "keepDone",
                 icon : "emperor.png",
-                text : "Sail North and Eastto the Warvish Tundralands and beseech the Dwarvish Chieftan to open the gate to Mount Vezu."
+                text : "Sail North and East to the Warvish Tundralands and beseech the Dwarvish Chieftan to open the gate to Mount Vezu."
             },
         "Vygurn Tower" :
             {
@@ -5501,6 +5501,7 @@ XXXXXXXXXXXXXXTT:TTXXXXXXXXXXXXXX\
                     altIcon : "sigil.png",
                     action : "TALK",
                     after : "cryptsDone",
+                    until : "keepStart",
                     sets : "keepStart",
                     title : "King",
                     text : "We would feast for weeks in celebration of your victory, but you must warn the Dwarves in the Tundralands that Vezu has returned. Take this Sigil to Rogaard Keep so they know you have my blessing. Will you go?"
@@ -6496,6 +6497,11 @@ AAAA::A:::::A:::T::TT~~~~\
                     transitionType : "outdoor",
                     targetX : 51,
                     targetY : 5
+                },
+                {
+                    type : "block",
+                    x : 14,
+                    y : 47
                 },
                 {
                     type : "encounter",

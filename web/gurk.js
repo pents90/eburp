@@ -10952,7 +10952,7 @@
   }
   HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;;
 
-    console.log('Starting S.U.R.P...');
+    console.log('Starting E.B.U.R.P...');
     return App.gurk = new Gurk();
   };
 
