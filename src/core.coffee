@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 #
-# Contains the core utlities and UI elements that are used to construct the
+# Contains the core utilities and UI elements that are used to construct the
 # game, but nothing to do with the game itself.
 #
 # -----------------------------------------------------------------------------
