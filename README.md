@@ -36,7 +36,7 @@ There are three steps to building this bad boy.
     `./build.sh web`
     `./build.sh android/assets`
     `./build.sh ios/Gurk/Gurk`
-3. For web, simply load `index.html` in a web browser. Note that if try load it as a file: URL instead of hosting it via HTTP, Chrome will complain about security and the game won't run (on platforms with Python installed type `python -m SimpleHTTPServer` in the directory containing `index.html` for a simple webserver). For Android, build and install the included Android project in the 'android' folder. For iOS, build and install the Xcode project in the 'ios' folder.
+3. For web, simply load `index.html` in a web browser. Note that if you try load it as a `file:` URL instead of hosting it via HTTP, Chrome will complain about security and the game won't run (on platforms with Python installed type `python -m SimpleHTTPServer` in the directory containing `index.html` for a simple webserver). For Android, build and install the included Android project in the 'android' folder. For iOS, build and install the Xcode project in the 'ios' folder.
 
 ## Architecture
 
