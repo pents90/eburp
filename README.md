@@ -31,7 +31,7 @@ You can also use the map editor by running the Java class gurk.MapEditor.
 
 There are three steps to building this bad boy.
 
-1. Run the Java class gurk.ImageCompiler with two arguments: the game file (game/gurkDemo.js for the demo game) and the platform target, which is either web, android or ios.
+1. Run the Java class gurk.ImageCompiler with two arguments: the game file (game/gurkDemo.js for the demo game) and the platform target, which is either `web`, `android` or `ios`.
 2. Run the build.sh file, giving it one of three arguments, based on what platform you are targeting:
     `./build.sh web`
     `./build.sh android/assets`
