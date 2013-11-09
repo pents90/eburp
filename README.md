@@ -19,7 +19,7 @@ The game itself is also simple, but has enough complexity to support an interest
 ## If You Use This Project
 
 Even though the name "Gurk" is all over the source and the demo game. Please don't call your game "Gurk", that's our little brand!
-Also, you can use anything that is in this open-source project, but please don't pirate and graphics or music from the Gurk series that is not included here.
+Also, you can use anything that is in this open-source project, but please don't pirate any graphics or music from the Gurk series that is not included here.
 That's all, enjoy!
 
 ## Making Your Own Game
