@@ -43,9 +43,9 @@ There are three steps to building this bad boy.
 The engine consists of the following CoffeeScript files: 
 
 * core.coffee - This has all the fundamental drawing and GUI utilities.
-* model.coffee - This defines the core data model for the game, including heroes, items, creatures and spells.
-* adventure.coffee - This has all the user interface for the entire except for combat.
-* combat.coffee - This has the combat user interface and engine.
+* model.coffee - This defines the data model for the game, including heroes, items, creatures and spells.
+* adventure.coffee - This defines all the user interface for the entire game except for combat.
+* combat.coffee - This is the combat user interface and engine.
 * gurk.coffee - This ties everything together and serves as the entry point into the game.
 
 There will be more to docs to come!
