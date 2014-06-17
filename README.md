@@ -19,7 +19,7 @@ The game itself is also simple, but has enough complexity to support an interest
 ## If You Use This Project
 
 Even though the name "Gurk" is all over the source and the demo game. Please don't call your game "Gurk", that's our little brand!
-Also, you can use anything that is in this open-source project, but please don't pirate and graphics or music from the Gurk series that is not included here.
+Also, you can use anything that is in this open-source project, but please don't pirate any graphics or music from the Gurk series that is not included here.
 That's all, enjoy!
 
 ## Making Your Own Game
@@ -29,23 +29,24 @@ You can also use the map editor by running the Java class gurk.MapEditor.
 
 ## Build Instructions
 
-There are three steps to building this bad boy.
+To build the demo game for web, there is a single script you can run: `./build-demo.sh`. That script can be modified to build for other platforms, build different games, etc. Otherwise, these are the steps to building this bad boy:
 
-1. Run the Java class gurk.ImageCompiler with two arguments: the game file (game/gurkDemo.js for the demo game) and the platform target, which is either web, android or ios.
-2. Run the build.sh file, giving it one of three arguments, based on what platform you are targeting:
+1. Compile the Java classes in the `tools` directory to a path called `out/production/jurk`. Alternatively (and ideally) use IntelliJ Idea Community Edition to build the tools, as the included Idea project is already set up to do this.
+2. Run the Java class gurk.ImageCompiler with two arguments: the game file (`game/gurkDemo.js` for the demo game) and the platform target, which is either `web`, `android` or `ios`.
+3. Run the build.sh file, giving it one of three arguments, based on what platform you are targeting:
     `./build.sh web`
     `./build.sh android/assets`
     `./build.sh ios/Gurk/Gurk`
-3. For web, simply load `index.html` in a web browser. Note that if try load it as a file: URL instead of hosting it via HTTP, Chrome will complain about security and the game won't run (on platforms with Python installed type `python -m SimpleHTTPServer` in the directory containing `index.html` for a simple webserver). For Android, build and install the included Android project in the 'android' folder. For iOS, build and install the Xcode project in the 'ios' folder.
+4. For web, simply load `index.html` in a web browser. Note that if you try load it as a `file:` URL instead of hosting it via HTTP, Chrome will complain about security and the game won't run (on platforms with Python installed type `python -m SimpleHTTPServer` in the directory containing `index.html` for a simple webserver). For Android, build and install the included Android project in the 'android' folder. For iOS, build and install the Xcode project in the 'ios' folder.
 
 ## Architecture
 
 The engine consists of the following CoffeeScript files: 
 
 * core.coffee - This has all the fundamental drawing and GUI utilities.
-* model.coffee - This defines the core data model for the game, including heroes, items, creatures and spells.
-* adventure.coffee - This has all the user interface for the entire except for combat.
-* combat.coffee - This has the combat user interface and engine.
+* model.coffee - This defines the data model for the game, including heroes, items, creatures and spells.
+* adventure.coffee - This defines all the user interface for the entire game except for combat.
+* combat.coffee - This is the combat user interface and engine.
 * gurk.coffee - This ties everything together and serves as the entry point into the game.
 
 There will be more to docs to come!
